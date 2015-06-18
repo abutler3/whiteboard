@@ -12,6 +12,13 @@ describe "Creating Projects" do
 
     expect(page).to have_content("Project has been created.")
 
+    project = Project.find_by(name: "Home page redesign")
+
+    expect(page.current_url).to eql(project_url(project))
+
+    title = "Home page redesign - Projects - Whiteboard"
+    expect(page).to have_title(title)
+
   end
 
 end
