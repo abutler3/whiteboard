@@ -14,7 +14,18 @@
 
   <body>
 
-    <%= yield %>
+    <div class="row">
+      <div class="large-12 columns">
+        <% flash.each do |key, message| %>
+          <div>
+            <%= message %>
+          </div>
+        <% end %>
+        
+        <%= yield %>
+
+      </div>
+    </div>
 
   </body>
 </html>
