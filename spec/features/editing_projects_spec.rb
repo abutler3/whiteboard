@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Editing Projects" do\
+describe "Editing Projects" do
 
   before do
     FactoryGirl.create(:project, name: "Home page redesign")
