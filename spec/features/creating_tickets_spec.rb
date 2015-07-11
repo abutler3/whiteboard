@@ -1,7 +1,9 @@
 require "rails_helper"
 
 describe "Creating Tickets" do
+  let(:user) { FactoryGirl.create(:user) }
   before do
+    login_as(user)
 
     FactoryGirl.create(:project, name: "Internet Explorer")
 
@@ -17,6 +19,9 @@ describe "Creating Tickets" do
     click_button "Create Ticket"
 
     expect(page).to have_content("Ticket has been created.")
+    # within("#ticket #author") do
+    #   expect(page).to have_content("Created by")
+    # end
   end
 
   scenario "with missing fields" do

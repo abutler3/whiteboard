@@ -5,22 +5,24 @@
   <ul class="actions">
     <li><%= link_to fa_icon("pencil") + " Edit Project", edit_project_path(@project), class: "button round" %></li>
     <li><%= link_to fa_icon("trash") + " Delete Project", project_path(@project), method: :delete, data:{ confirm: "Are you sure you want to delete this project?" }, class: "button round" %></li>
+    <li><%= link_to "New Ticket", new_project_ticket_path(@project), class: "button" %></li>
+
   </ul>
 </div>
+<div class="row">
+  <div class="large-12 columns">
+    <p><%= @project.description %></p>
 
-<p><%= @project.description %></p>
-
-<div class="page-header">
-  <h2>Tickets</h2>
-  <ul class="actions">
-    <li><%= link_to "New Ticket", new_project_ticket_path(@project), class: "new" %></li>
-  </ul>
+    <div>
+      <h2>Tickets</h2>
+    </div>
+    <ul id="tickets">
+      <% @project.tickets.each do |ticket| %>
+        <li>
+          #<%= ticket.id %> -
+          <%= link_to ticket.title, [@project, ticket] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
-<ul id="tickets">
-  <% @project.tickets.each do |ticket| %>
-    <li>
-      #<%= ticket.id %> -
-      <%= link_to ticket.title, [@project, ticket] %>
-    </li>
-  <% end %>
-</ul>

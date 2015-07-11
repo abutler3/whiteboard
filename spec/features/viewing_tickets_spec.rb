@@ -2,13 +2,13 @@ require "rails_helper"
 
 describe "Viewing Tickets" do
   before do
-
+    user = FactoryGirl.create(:user)
     redesign = FactoryGirl.create(:project, name: "Website redesign")
-    FactoryGirl.create(:ticket, project: redesign, title: "Add bootstrap", description: "CSS Framework")
+    FactoryGirl.create(:ticket, project: redesign, title: "Add bootstrap", description: "CSS Framework", author: user)
 
 
     ie = FactoryGirl.create(:project, name: "Internet Explorer")
-    FactoryGirl.create(:ticket, project: ie, title: "Standards compliance", description: "Not a joke.")
+    FactoryGirl.create(:ticket, project: ie, title: "Standards compliance", description: "Not a joke.", author: user)
 
     visit "/"
   end
