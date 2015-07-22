@@ -1,0 +1,29 @@
+
+<%= simple_form_for([:admin, project]) do |f| %>
+      <div class="row">
+        <div class="small-10">
+          <div class="row">
+            <div class="small-10 columns">
+              <%= f.input :name %>
+            </div>
+          </div>
+        </div>
+
+        <div class="small-10">
+          <div class="row">
+            <div class="small-10 columns">
+              <%= f.input :description %>
+            </div>
+          </div>
+        </div>
+
+        <div class="small-10">
+          <div class="row">
+            <div class="small-10 small-offset-2 columns">
+              <%= f.button :submit %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<% end %>

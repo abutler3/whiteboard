@@ -3,12 +3,13 @@ require "rails_helper"
 describe "Deleting Projects" do
 
   before do
-    FactoryGirl.create(:project, name: "Home page redesign")
-    visit "/"
-    click_link "Home page redesign"
+    login_as(FactoryGirl.create(:user, :admin))
   end
 
   scenario "Deleting a project" do
+    FactoryGirl.create(:project, name: "Home page redesign")
+    visit "/"
+    click_link "Home page redesign"
     click_link "Delete Project"
     expect(page).to have_content("Project has been deleted.")
     visit "/"
