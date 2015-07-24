@@ -4,7 +4,9 @@
   <h1><%= @project.name %></h1>
   <ul class="actions">
     <li><%= link_to fa_icon("pencil") + " Edit Project", edit_project_path(@project), class: "button round" %></li>
-    <li><%= link_to fa_icon("trash") + " Delete Project", admin_project_path(@project), method: :delete, data:{ confirm: "Are you sure you want to delete this project?" }, class: "button round" %></li>
+    <% admins_only do %>
+      <li><%= link_to fa_icon("trash") + " Delete Project", admin_project_path(@project), method: :delete, data:{ confirm: "Are you sure you want to delete this project?" }, class: "button round" %></li>
+    <% end %>
     <li><%= link_to "New Ticket", new_project_ticket_path(@project), class: "button" %></li>
 
   </ul>
