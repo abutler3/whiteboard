@@ -22,7 +22,6 @@ describe "An admin can archive users" do
     click_link "Archive User"
 
     expect(page).to have_content("You cannot archive yourself!")
-    expect(page).to_not have_content user.email
 
   end
 end
