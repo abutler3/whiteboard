@@ -23,6 +23,14 @@ class Admin::ProjectsController < Admin::ApplicationController
   	redirect_to projects_path
 	end
 
+  def show
+    #  uses Pundit to make sure that the current user is allowed to show the
+    # current proj- ect. If they are, the view will render as normal. If they
+    # aren’t, then a Pundit::Not- AuthorizedError exception will be raised,
+    # which you can rescue and handle however you want.
+    authorize @project, :show?
+  end
+
   private
 
   def project_params

@@ -2,14 +2,16 @@ require "rails_helper"
 
 describe "Viewing Tickets" do
   before do
-    user = FactoryGirl.create(:user)
+    author = FactoryGirl.create(:user)
     redesign = FactoryGirl.create(:project, name: "Website redesign")
-    FactoryGirl.create(:ticket, project: redesign, title: "Add bootstrap", description: "CSS Framework", author: user)
+    assign_role!(author, :viewer, redesign)
+    FactoryGirl.create(:ticket, project: redesign, author: author, title: "Add bootstrap", description: "CSS Framework")
 
 
     ie = FactoryGirl.create(:project, name: "Internet Explorer")
-    FactoryGirl.create(:ticket, project: ie, title: "Standards compliance", description: "Not a joke.", author: user)
-
+    assign_role!(author, :viewer, ie)
+    FactoryGirl.create(:ticket, project: ie, author: author, title: "Standards compliance", description: "Not a joke.")
+    login_as(author)
     visit "/"
   end
 

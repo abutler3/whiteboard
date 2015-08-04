@@ -5,10 +5,10 @@ describe "Creating Tickets" do
   before do
     login_as(user)
 
-    FactoryGirl.create(:project, name: "Internet Explorer")
-
-    visit "/"
-    click_link "Internet Explorer"
+    project = FactoryGirl.create(:project, name: "Internet Explorer")
+    assign_role!(user, :viewer, project)
+    visit project_path(project)
+    # click_link "Internet Explorer"
     click_link "New Ticket"
 
   end

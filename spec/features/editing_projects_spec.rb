@@ -1,9 +1,13 @@
 require "rails_helper"
 
 describe "Editing Projects" do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:project) { FactoryGirl.create(:project, name: "Home page redesign") }
 
   before do
-    FactoryGirl.create(:project, name: "Home page redesign")
+    login_as(user)
+    assign_role!(user, :viewer, project)
+    # FactoryGirl.create(:project, name: "Home page redesign")
     visit "/"
     click_link "Home page redesign"
     click_link "Edit Project"
