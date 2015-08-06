@@ -6,7 +6,7 @@ describe "Editing Projects" do
 
   before do
     login_as(user)
-    assign_role!(user, :viewer, project)
+    assign_role!(user, :manager, project)
     # FactoryGirl.create(:project, name: "Home page redesign")
     visit "/"
     click_link "Home page redesign"
