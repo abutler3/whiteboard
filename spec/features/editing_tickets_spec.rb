@@ -1,34 +1,35 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "Editing Tickets" do
-  let!(:project) { FactoryGirl.create(:project) }
-  let(:user) { FactoryGirl.create(:user) }
-  let!(:ticket) do
-    FactoryGirl.create(:ticket, project: project, author: user)
+RSpec.feature 'Users can edit existing tickets' do
+  let(:author)  { FactoryGirl.create(:user) }
+  let(:project) { FactoryGirl.create(:project) }
+  let(:ticket) do
+    FactoryGirl.create(:ticket, project: project, author: author)
   end
-
   before do
+    assign_role!(author, :viewer, project)
+    login_as(author)
+
     visit project_ticket_path(project, ticket)
     click_link "Edit Ticket"
   end
 
   scenario "with valid attributes" do
-    fill_in "Title", with: "Add bootstrap"
-    click_button "Update Ticket"
+    fill_in "Title", with: "Make it really shiny!"
 
-    expect(page).to have_content("Ticket has been updated.")
+    click_button "Update Ticket"
+    expect(page).to have_content "Ticket has been updated."
 
     within("#ticket h2") do
-      expect(page).to have_content("Add bootstrap")
+      expect(page).to have_content "Make it really shiny!"
+      expect(page).not_to have_content ticket.title
     end
-    expect(page).to_not have_content(ticket.title)
   end
 
   scenario "with invalid attributes" do
     fill_in "Title", with: ""
+
     click_button "Update Ticket"
-
-    expect(page).to have_content("Ticket has not been updated.")
-
+    expect(page).to have_content "Ticket has not been updated."
   end
 end
